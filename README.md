@@ -4,6 +4,8 @@
 
 The internal speakers don't work on my Linux laptop. Join me as I publicly fail to do anything about this.
 
+To be more precise: the speakers sound *absolutely phenomenal* if your definition of "phenomenal" is "like listening to music through a tin can filled with angry bees from the year 1997." The audio is so tinny and muffled that I'm pretty sure only the tweeters decided to show up for work today. Want to listen to your favorite song? Great! Now imagine it being performed by chipmunks trapped inside a shoebox. That's the experience.
+
 ## Do we have a solution?
 
 No.
