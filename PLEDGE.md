@@ -1,9 +1,8 @@
-# $2000 Bug Bounty to Whoever Fixes the Lenovo Legion Pro 7 16IAX10H's Speakers on Linux
+# Fix is now available [here](README.md)
+
+## $2000 Bug Bounty to Whoever Fixes the Lenovo Legion Pro 7 16IAX10H's Speakers on Linux
 
 We are a bunch of Linux users with the Lenovo Legion Pro 7 (16IAX10H) and we are **sick and tired** of our speakers not working properly. We also suck at writing Linux kernel audio drivers, especially when weird things like "Awinic smart amplifiers" are involved. **If you help us make sure that Linux has support for audio on our laptops, we will send you a lot of money.**
-
-# IMPORTANT ANNOUNCEMENT: WE HAVE A FIX
-@Lyapsus and I have JUST TESTED A WORKING FIX. MORE INFO COMING SOON!
 
 ## Bug bounty pledges
 
