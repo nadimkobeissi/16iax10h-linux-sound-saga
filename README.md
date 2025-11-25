@@ -4,7 +4,7 @@ This guide explains how to get audio working correctly on the Lenovo Legion Pro 
 
 Since this solution is still very new, it will take some time for all components to be properly integrated into the Linux kernel. Until that happens, you can follow the steps below, which have been rigorously tested and are confirmed to work.
 
-**This guide is currently for Linux kernel version 6.17.8. It will be updated for future kernel versions as they are released, until the fix is fully integrated into the kernel.**
+This guide will be updated for future kernel versions as they are released, until the fix is fully integrated into the kernel.
 
 ## Step 1: Install the AW88399 Firmware
 
@@ -12,16 +12,19 @@ Copy the `aw88399_acf.bin` file provided in this repository to `/lib/firmware/aw
 
 If you prefer to obtain your own copy of this firmware blob, [follow these instructions](https://bugzilla.kernel.org/show_bug.cgi?id=218329#c18).
 
-## Step 2: Download the Linux Kernel 6.17.8 Sources
+## Step 2: Download the Linux Kernel Sources
 
-Download the kernel sources by clicking [here](https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.17.8.tar.xz).
+This patch is tested under the following kernel versions. Click the one you desire to download its corresponding source code:
+
+ - [Linux 6.17.9](https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.17.9.tar.xz).
+ - [Linux 6.17.8](https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.17.8.tar.xz).
 
 ## Step 3: Patch the Linux Kernel Sources
 
-Copy the `16iax10h-audio-linux-6.17.8.patch` file from this repository into the root of your Linux kernel source directory. Then run:
+Copy the `16iax10h-audio-linux-<YOUR_KERNEL_VERSION>.patch` file from this repository into the root of your Linux kernel source directory. Then run:
 
 ```bash
-patch -p1 < 16iax10h-audio-linux-6.17.8.patch
+patch -p1 < 16iax10h-audio-linux-<YOUR_KERNEL_VERSION>.patch
 ```
 
 The patch should apply successfully to 10 files without any errors.
