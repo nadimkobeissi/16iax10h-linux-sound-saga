@@ -8,7 +8,11 @@ This guide will be updated for future kernel versions as they are released, unti
 
 ## Step 1: Install the AW88399 Firmware
 
-Copy the `aw88399_acf.bin` file provided in this repository to `/lib/firmware/aw88399_acf.bin`.
+Copy the `aw88399_acf.bin` file provided in this repository to `/lib/firmware/aw88399_acf.bin`:
+
+```bash
+cp -f fix/firmware/aw88399_acf.bin /lib/firmware/aw88399_acf.bin
+```
 
 If you prefer to obtain your own copy of this firmware blob, [follow these instructions](https://bugzilla.kernel.org/show_bug.cgi?id=218329#c18).
 
@@ -22,7 +26,7 @@ This patch is tested under the following kernel versions. Click the one you desi
 
 ## Step 3: Patch the Linux Kernel Sources
 
-Copy the `16iax10h-audio-linux-<YOUR_KERNEL_VERSION>.patch` file from this repository into the root of your Linux kernel source directory. Then run:
+Copy the `16iax10h-audio-linux-<YOUR_KERNEL_VERSION>.patch` file from this repository's `fix/patches` folder into the root of your Linux kernel source directory. Then run:
 
 ```bash
 patch -p1 < 16iax10h-audio-linux-<YOUR_KERNEL_VERSION>.patch
@@ -169,13 +173,14 @@ Reboot into the patched kernel. After rebooting, run `uname -a` to verify that y
 
 This step is necessary for proper volume control.
 
-Copy the `HiFi-analog.conf` file from this repository to `/usr/share/alsa/ucm2/HDA/HiFi-analog.conf`, overwriting the existing file:
+Copy the files from this repository's `fix/ucm2/` folder to `/usr/share/alsa/ucm2/HDA/`, overwriting the existing files:
 
 ```bash
-sudo cp -f HiFi-analog.conf /usr/share/alsa/ucm2/HDA/HiFi-analog.conf
+sudo cp -f fix/ucm2/HiFi-analog.conf /usr/share/alsa/ucm2/HDA/HiFi-analog.conf
+sudo cp -f fix/ucm2/HiFi-mic.conf /usr/share/alsa/ucm2/HDA/HiFi-mic.conf
 ```
 
-First, identify your sound card ID by running:
+Then, identify your sound card ID by running:
 
 ```bash
 alsaucm listcards
@@ -193,6 +198,7 @@ Then, run the commands below, If you got `hw:1` above, change `hw:0` to `hw:1` a
 ```bash
 alsaucm -c hw:0 reset
 alsaucm -c hw:0 reload
+systemctl --user restart pipewire pipewire-pulse wireplumber
 amixer sset -c 0 Master 100%
 amixer sset -c 0 Headphone 100%
 amixer sset -c 0 Speaker 100%
@@ -221,5 +227,7 @@ Approximately 95% of the engineering work was done by [Lyapsus](https://github.c
 I ([Nadim Kobeissi](https://nadim.computer)) conducted the initial investigation that identified the missing components needed for audio to work on the 16IAX10H on Linux. Building on what I learned from Lyapsus's work, I helped debug and clean up his kernel code, tested it, and made minor improvements. I also contributed the solution to the volume control issue documented in Step 8, and wrote this guide.
 
 Gergo K. showed me how to extract the AW88399 firmware from the Windows driver package and install it on Linux, as documented in Step 1.
+
+@rgarber11 graciously contributed [the fix](https://github.com/nadimkobeissi/16iax10h-linux-sound-saga/issues/19#issuecomment-3594367397) for making the internal microphone work.
 
 Sincere thanks to everyone who [pledged](PLEDGE.md) a reward for solving this problem. The reward goes to Lyapsus.
