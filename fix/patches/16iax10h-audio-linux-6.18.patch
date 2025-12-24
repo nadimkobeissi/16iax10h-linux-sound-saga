@@ -80,7 +80,7 @@ diff '--color=auto' -u -r -N linux-6.18/sound/hda/codecs/realtek/alc269.c patche
  	}
  };
  
-@@ -7133,6 +7155,8 @@
+@@ -7133,12 +7155,15 @@
  	SND_PCI_QUIRK(0x17aa, 0x38fa, "Thinkbook 16P Gen5", ALC287_FIXUP_MG_RTKC_CSAMP_CS35L41_I2C_THINKPAD),
  	SND_PCI_QUIRK(0x17aa, 0x38fd, "ThinkBook plus Gen5 Hybrid", ALC287_FIXUP_TAS2781_I2C),
  	SND_PCI_QUIRK(0x17aa, 0x3902, "Lenovo E50-80", ALC269_FIXUP_DMIC_THINKPAD_ACPI),
@@ -89,6 +89,13 @@ diff '--color=auto' -u -r -N linux-6.18/sound/hda/codecs/realtek/alc269.c patche
  	SND_PCI_QUIRK(0x17aa, 0x390d, "Lenovo Yoga Pro 7 14ASP10", ALC287_FIXUP_YOGA9_14IAP7_BASS_SPK_PIN),
  	SND_PCI_QUIRK(0x17aa, 0x3913, "Lenovo 145", ALC236_FIXUP_LENOVO_INV_DMIC),
  	SND_PCI_QUIRK(0x17aa, 0x391f, "Yoga S990-16 pro Quad YC Quad", ALC287_FIXUP_TXNW2781_I2C),
+ 	SND_PCI_QUIRK(0x17aa, 0x3920, "Yoga S990-16 pro Quad VECO Quad", ALC287_FIXUP_TXNW2781_I2C),
+ 	SND_PCI_QUIRK(0x17aa, 0x3929, "Thinkbook 13x Gen 5", ALC287_FIXUP_MG_RTKC_CSAMP_CS35L41_I2C_THINKPAD),
+ 	SND_PCI_QUIRK(0x17aa, 0x392b, "Thinkbook 13x Gen 5", ALC287_FIXUP_MG_RTKC_CSAMP_CS35L41_I2C_THINKPAD),
++	SND_PCI_QUIRK(0x17aa, 0x3938, "Lenovo Legion Pro 7 16AFR10H", ALC287_FIXUP_LENOVO_LEGION_AW88399),
+ 	SND_PCI_QUIRK(0x17aa, 0x3977, "IdeaPad S210", ALC283_FIXUP_INT_MIC),
+ 	SND_PCI_QUIRK(0x17aa, 0x3978, "Lenovo B50-70", ALC269_FIXUP_DMIC_THINKPAD_ACPI),
+ 	SND_PCI_QUIRK(0x17aa, 0x3bf8, "Quanta FL1", ALC269_FIXUP_PCM_44K),
 diff '--color=auto' -u -r -N linux-6.18/sound/hda/codecs/side-codecs/Kconfig patched/sound/hda/codecs/side-codecs/Kconfig
 --- linux-6.18/sound/hda/codecs/side-codecs/Kconfig	2025-12-01 00:42:10.000000000 +0200
 +++ patched/sound/hda/codecs/side-codecs/Kconfig	2025-12-01 08:39:50.449312649 +0200
@@ -138,7 +145,7 @@ diff '--color=auto' -u -r -N linux-6.18/sound/hda/codecs/side-codecs/Makefile pa
 diff '--color=auto' -u -r -N linux-6.18/sound/hda/codecs/side-codecs/aw88399_hda.c patched/sound/hda/codecs/side-codecs/aw88399_hda.c
 --- linux-6.18/sound/hda/codecs/side-codecs/aw88399_hda.c	1970-01-01 02:00:00.000000000 +0200
 +++ patched/sound/hda/codecs/side-codecs/aw88399_hda.c	2025-12-01 08:41:02.325627224 +0200
-@@ -0,0 +1,473 @@
+@@ -0,0 +1,474 @@
 +// SPDX-License-Identifier: GPL-2.0-only
 +//
 +// aw88399_hda.c -- AW88399 HDA side codec driver
@@ -445,11 +452,12 @@ diff '--color=auto' -u -r -N linux-6.18/sound/hda/codecs/side-codecs/aw88399_hda
 +
 +	/*
 +	 * Lenovo Legion Pro 7 16IAX10H (product 83F5, SSIDs 17aa:3906/3907/3d6c)
++	 * Lenovo Legion Pro 7 16AFR10H (product 83RU, SSIDs 17aa:3938)
 +	 * has I2C devices wired backwards: 0x34 is physically right, 0x35 is left.
 +	 * Swap channels to correct L/R assignment. This is a hardware wiring issue
 +	 * specific to this model, not a driver bug.
 +	 */
-+	if (dmi_match(DMI_PRODUCT_NAME, "83F5")) {
++	if (dmi_match(DMI_PRODUCT_NAME, "83F5") || dmi_match(DMI_PRODUCT_NAME, "83RU")) {
 +		aw88399->channel = 1 - aw88399->channel;
 +		dev_info(dev, "Legion quirk: swapped to channel %d (index %d, addr 0x%02x)\n",
 +			 aw88399->channel, aw88399->index, i2c->addr);
