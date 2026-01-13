@@ -26,7 +26,7 @@ If you prefer to obtain your own copy of this firmware blob, [follow these instr
 
 This patch is tested under the following kernel versions. Click the one you desire to download its corresponding source code:
 
- - [Linux 6.18](https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.tar.xz) (also verified to work on **[6.18.1](https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.1.tar.xz)**, **[6.18.2](https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.2.tar.xz)**, **[6.18.3](https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.3.tar.xz)** and **[6.18.4](https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.4.tar.xz)**.).
+ - [Linux 6.18](https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.tar.xz) (also verified to work on **[6.18.1](https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.1.tar.xz)**, **[6.18.2](https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.2.tar.xz)**, **[6.18.3](https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.3.tar.xz)**, **[6.18.4](https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.4.tar.xz)** and **[6.18.5](https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.5.tar.xz)**.).
 
 ## Step 3: Patch the Linux Kernel Sources
 
