@@ -21,6 +21,10 @@ To our surprise, this fix actually fixed audio on more laptops than just the 16I
 
 If your laptop has a similar sound architecture and you're running into similar problems, please try this fix and let us know if it works for you too!
 
+## Ubuntu 26.04 guide
+
+For Ubuntu 26.04 users, see the [Ubuntu 26.04 speaker fix guide](UBUNTU_26_04.md). It covers Ubuntu-specific diagnosis, `bindeb-pkg` kernel package builds, GRUB, Secure Boot, and recovery steps.
+
 ## Step 1: Install the AW88399 Firmware
 
 Copy the `aw88399_acf.bin` file provided in this repository to `/lib/firmware/aw88399_acf.bin`:
