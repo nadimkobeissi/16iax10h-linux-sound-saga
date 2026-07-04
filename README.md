@@ -22,6 +22,12 @@ To our surprise, this fix actually fixed audio on more laptops than just the 16I
 
 If your laptop has a similar sound architecture and you're running into similar problems, please try this fix and let us know if it works for you too!
 
+## A better and simpler solution for Arch Linux users
+
+If you're using Arch Linux, you can actually edit the `PKGBUILD` file of the `linux` package.
+
+For the tutorial on how to do this, see [ARCH.md](ARCH.md).
+
 ## Step 1: Install the AW88399 Firmware
 
 Copy the `aw88399_acf.bin` file provided in this repository to `/lib/firmware/aw88399_acf.bin`:
