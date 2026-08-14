@@ -64,6 +64,8 @@ Note that, apart from [`marco-giunta/legion-pro7-gen10-audio`](https://github.co
 | Ubuntu | [nuclearcat/aw88399-hda-dkms](https://github.com/nuclearcat/aw88399-hda-dkms) | Tutorial on installing the patched kernel as an external `dkms` module, no kernel compilation required. |
 | Ubuntu | [paul-lupu/legion-16iax10h-ubuntu-audio](https://github.com/paul-lupu/legion-16iax10h-ubuntu-audio) | Tutorial on compiling the kernel under Ubuntu using `make` for the kernel and `dkms` for the NVIDIA drivers. |
 
+For Ubuntu systems using dracut and an encrypted root, see the locally validated [Ubuntu 26.04 encrypted-root addendum](UBUNTU_26_04.md). It covers the Plymouth password-prompt failure caused by a missing `i915` module, verification, safe rollback, and optional early-boot tracing.
+
 ---
 
 A detailed step-by-step guide for Arch Linux and Fedora (based on the general method) follows below.
