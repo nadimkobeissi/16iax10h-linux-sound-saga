@@ -226,7 +226,7 @@ You should get something like this:
   LENOVO-83F5-LegionPro716IAX10H-LNVNB161216
 ```
 
-Then, run the commands below, If you got `hw:1` above, change `hw:0` to `hw:1` and `-c 0` to `-c 1`:
+Then, run the commands below. If you got `hw:1` above, change `hw:0` to `hw:1` and `-c 0` to `-c 1`:
 
 ```bash
 alsaucm -c hw:0 reset
@@ -238,6 +238,26 @@ amixer sset -c 0 Speaker 100%
 ```
 
 **Note:** The last three commands are for speaker calibration, not for setting your volume to maximum. They must be run for the speakers to function properly, but they do not control your actual volume level.
+
+### Step 9b (Optional but Highly Recommended): Package-Upgrade Proofing & Woofer Volume Scaling
+
+If you find that your system volume slider only attenuates the tweeters while the AW88399 woofers stay at fixed maximum volume (or if distribution updates to `alsa-ucm-conf` overwrite your UCM files), apply this WirePlumber device-level soft-mixer rule:
+
+**For WirePlumber 0.4.x (Ubuntu 24.04):**
+```bash
+mkdir -p ~/.config/wireplumber/main.lua.d
+cp -f fix/wireplumber/51-legion-upmix.lua ~/.config/wireplumber/main.lua.d/51-legion-upmix.lua
+systemctl --user restart pipewire pipewire-pulse wireplumber
+```
+
+**For WirePlumber 0.5.x+ (Fedora 40+, Arch):**
+```bash
+mkdir -p ~/.config/wireplumber/wireplumber.conf.d
+cp -f fix/wireplumber/51-legion-upmix.conf ~/.config/wireplumber/wireplumber.conf.d/51-legion-upmix.conf
+systemctl --user restart pipewire pipewire-pulse wireplumber
+```
+
+This enforces uniform software volume scaling across all 4 channels simultaneously in `$HOME` and is immune to distro package updates.
 
 ## Step 10: Enjoy Working Audio!
 
@@ -262,5 +282,7 @@ I ([Nadim Kobeissi](https://nadim.computer)) conducted the initial investigation
 Gergo K. showed me how to extract the AW88399 firmware from the Windows driver package and install it on Linux, as documented in Step 1.
 
 [Richard Garber](https://github.com/rgarber11) graciously contributed [the fix](https://github.com/nadimkobeissi/16iax10h-linux-sound-saga/issues/19#issuecomment-3594367397) for making the internal microphone work.
+
+[Martín el Cheikh](https://github.com/melcheikh) contributed the WirePlumber soft-mixer solution (`api.alsa.soft-mixer`) and 4.0 channel upmix rules to resolve woofer volume scaling desynchronization and ensure resilience against `alsa-ucm-conf` package updates (Step 9b).
 
 Sincere thanks to everyone who [pledged](PLEDGE.md) a reward for solving this problem. The reward goes to Lyapsus.
