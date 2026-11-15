@@ -59,6 +59,10 @@ zcat /proc/config.gz | grep CONFIG_SND_HDA_SCODEC_AW88399
 
 `CONFIG_SND_HDA_SCODEC_AW88399_I2C=m` needs to be there for the driver to work. If instead you see `# CONFIG_SND_HDA_SCODEC_AW88399_I2C is not set`, your distribution has not enabled the driver; contact your kernel maintainers and ask them to enable this config parameter.
 
+3. Did you blacklist the `i915` module?
+
+Add `snd_hda_core.gpu_bind=0` to the boot parameters; see [#69](https://github.com/nadimkobeissi/16iax10h-linux-sound-saga/issues/69) for more info.
+
 ## Filing issues
 
 Please don't file issues to complain about something missing. Filing issues about something being broken is fine, but if it's a request to add something, either add it yourself or just... politely don't speak.
