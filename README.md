@@ -9,8 +9,6 @@ This guide explains how to get audio working correctly on the Lenovo Legion Pro 
 The AW88399 HDA side codec driver has been merged into the Linux kernel and is now included in 7.3+.
 Once you are running kernel 7.3 or later, the laptop's woofers will work *without any custom kernel*, **provided the firmware is installed at the correct location and the AW88399 HDA modules are loaded correctly** (see the troubleshooting section below).
 
-The only remaining step toward a fully zero-configuration experience is getting the firmware binaries accepted into the `linux-firmware` repository. Until then, users need to [install firmware manually](#step-1-install-the-aw88399-firmware) regardless of kernel version.
-
 > [!NOTE]
 > The Legion R9000P AFR10 codec IDs were confirmed after the 7.3 merge window closed; hence, official upstream support for this model will be included starting with kernel 7.4.
 > Owners of this model currently need to switch to 7.4-rc1+ kernels, or patch kernels 7.3.x using [this small backport patch](fix/patches/afr10-audio-linux-7.3.patch).
@@ -18,10 +16,17 @@ The only remaining step toward a fully zero-configuration experience is getting 
 
 ### Firmware status
 
-Firmware binaries for all currently supported Lenovo Legion models [have been submitted by Awinic on behalf of Lenovo to the `linux-firmware` repo](https://lore.kernel.org/linux-firmware/4b70e056-89d9-4d92-8ecb-ecb4c7d48c8a@app.fastmail.com/T/#t) (currently pending for review); until these files are merged and start being packaged by distros, users need to install firmware manually regardless of kernel version.
+The required firmware binaries for the supported Lenovo Legion models have been [merged in the `linux-firmware` repo on 2026/11/14](https://gitlab.com/kernel-firmware/linux-firmware/-/commit/1cafb17a3ead182e37ab572964bee2a692a554c5); until these files start being packaged by distributions, users will need to install firmware manually regardless of kernel version.
 
 > [!IMPORTANT]
-> Kernel 7.4 includes [breaking changes regarding firmware loading](https://lore.kernel.org/linux-sound/87wlrdin6q.wl-tiwai@suse.de/T/#t): users running 7.4-rc1+ will need to reinstall firmware to a different location (`/lib/firmware/awinic/aw88399_acf_<SSID>.bin` instead of `/lib/firmware/aw88399_acf.bin`). See [step 1 of the main guide below](#step-1-install-the-aw88399-firmware) for instructions.
+> The driver included in kernel 7.3 requests firmware under a different path and will not find the officially packaged files; therefore, on versions 7.3.x, manual firmware installation will be needed regardless.
+>
+> Kernel 7.4 includes [breaking changes regarding firmware loading](https://lore.kernel.org/linux-sound/87wlrdin6q.wl-tiwai@suse.de/T/#t) that allow the driver to make use of these files; therefore, users upgrading from 7.3 to 7.4 will need to manually reinstall firmware to a different location (`/lib/firmware/awinic/aw88399_acf_<SSID>.bin` instead of `/lib/firmware/aw88399_acf.bin`), but only until the official firmware packages ship.
+>
+> For either case, see [step 1 of the main guide below](#step-1-install-the-aw88399-firmware) for instructions.
+
+> [!IMPORTANT]
+> The AFR10 model's IDs (17aa3934/5) were reported after the original firmware submission, and as such its firmware binaries were not merged together with the others. Therefore, AFR10 owners will still have to install firmware manually for now (see above).
 
 ## Audio still broken even on kernel 7.3+
 
